@@ -24,7 +24,7 @@ const index = (req, res, next) => {
     })
   }))
   .catch(next);
-};
+}
 
 const show = (req, res) => {
   res.json({
@@ -70,4 +70,4 @@ module.exports = controller({
   { method: authenticate },
   { method: setModel(Theme), only: ['show'] },
   { method: setModel(Theme, { forUser: true }), only: ['update', 'destroy'] }
-] })
+]})
