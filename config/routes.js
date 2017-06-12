@@ -2,12 +2,10 @@
 
 module.exports = require('lib/wiring/routes')
 
-// create routes
-
-// what to run for `GET /`
+// Default `GET / route`
 .root('root#root')
 
-// standards RESTful routes
+// standard RESTful routes
 .resources('examples')
 .resources('themes')
 
@@ -18,6 +16,3 @@ module.exports = require('lib/wiring/routes')
 .patch('/change-password/:id', 'users#changepw')
 
 .resources('users', { only: ['index', 'show'] })
-
-// all routes created
-;

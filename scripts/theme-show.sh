@@ -11,4 +11,4 @@ curl "${API}${URL_PATH}/${ID}" \
 
 echo
 
-# TOKEN=04NN9dzu9Wy77knTyOux9cwIPRFstY7IaQ4sXP4ImV8=--mov1dQ3kyjsODRb6IgMv5xjf/4kEv/+/NMmeBJoPqbU= ID=593eb1d923e2fb13e9c26e5f ./scripts/theme-show.sh
+# TOKEN=qsYVlt39Cb/DSu7+f2JSwB8x0bRwaBJQhlmzFpd8sSo=--IOcoPPo9bojm9qAdAtUvbSSwpuj+OyIr1r9SAR/Ycgg= ID=593eb2746d39231fe9ceb386 ./scripts/theme-show.sh
