@@ -7,6 +7,9 @@ const themeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  vars: {
+    type : Array , "default" : []
+  },
   _owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
