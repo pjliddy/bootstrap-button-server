@@ -23,7 +23,7 @@ app.use(middleware['404']);
 // error handlers
 app.use(middleware['error-handler']);
 
-const debug = require('debug')('capstone-server:server');
+const debug = require('debug')('bootstrap-button:server');
 const http = require('http');
 
 /**

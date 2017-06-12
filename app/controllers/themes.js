@@ -6,7 +6,7 @@
 const controller = require('lib/wiring/controller')
 const models = require('app/models')
 // mongoose schema in models directory
-const Example = models.example
+const Theme = models.theme
 
 // what is a concern?
 const authenticate = require('./concerns/authenticate')
@@ -15,23 +15,23 @@ const setModel = require('./concerns/set-mongoose-model')
 
 // req = request; res = response; next = next function in chain
 const index = (req, res, next) => {
-  Example.find()
+  Theme.find()
     // get response & output at json
 
-    // .then(examples => res.json({
+    // .then(themes => res.json({
       //   JSON_GOES_HERE
       // }))
 
-    // .then(examples => res.json({
-    //   examples: EXAMPLE_VALUES
+    // .then(themes => res.json({
+    //   themes: EXAMPLE_VALUES
     // }))
 
-    // EXAMPLE_VALUES = examples.map((e) => e.toJSON( OPTIONS ))
+    // EXAMPLE_VALUES = themes.map((e) => e.toJSON( OPTIONS ))
 
     // OPTIONS = { virtuals: true, user: req.user }
 
-    .then(examples => res.json({
-      examples: examples.map((e) =>
+    .then(themes => res.json({
+      themes: themes.map((e) =>
         e.toJSON({ virtuals: true, user: req.user }))
     }))
     // next event in chain is error handler
@@ -40,32 +40,32 @@ const index = (req, res, next) => {
 
 const show = (req, res) => {
   res.json({
-    example: req.example.toJSON({ virtuals: true, user: req.user })
+    theme: req.theme.toJSON({ virtuals: true, user: req.user })
   })
 }
 
 const create = (req, res, next) => {
-  const example = Object.assign(req.body.example, {
+  const theme = Object.assign(req.body.theme, {
     _owner: req.user._id
   })
-  Example.create(example)
-    .then(example =>
+  Theme.create(theme)
+    .then(theme =>
       res.status(201)
         .json({
-          example: example.toJSON({ virtuals: true, user: req.user })
+          theme: theme.toJSON({ virtuals: true, user: req.user })
         }))
     .catch(next)
 }
 
 const update = (req, res, next) => {
   delete req.body._owner  // disallow owner reassignment.
-  req.example.update(req.body.example)
+  req.theme.update(req.body.theme)
     .then(() => res.sendStatus(204))
     .catch(next)
 }
 
 const destroy = (req, res, next) => {
-  req.example.remove()
+  req.theme.remove()
     .then(() => res.sendStatus(204))
     .catch(next)
 }
@@ -79,6 +79,6 @@ module.exports = controller({
 }, { before: [
   { method: setUser, only: ['index', 'show'] },
   { method: authenticate, except: ['index', 'show'] },
-  { method: setModel(Example), only: ['show'] },
-  { method: setModel(Example, { forUser: true }), only: ['update', 'destroy'] }
+  { method: setModel(Theme), only: ['show'] },
+  { method: setModel(Theme, { forUser: true }), only: ['update', 'destroy'] }
 ] })

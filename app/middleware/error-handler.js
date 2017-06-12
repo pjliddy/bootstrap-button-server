@@ -1,6 +1,6 @@
 'use strict';
 
-const debug = require('debug')('capstone-server:error-handler');
+const debug = require('debug')('bootstrap-button:error-handler');
 
 const errorHandler = (err, req, res, next) => {
   //jshint unused:false
