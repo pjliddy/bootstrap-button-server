@@ -1,14 +1,14 @@
 'use strict'
-/*
-  This is the controller
-*/
+const http = require('http')
+const debug = require('debug')('http')
+const name = 'bootstrap-button'
 
 const controller = require('lib/wiring/controller')
 const models = require('app/models')
 // mongoose schema in models directory
 const Theme = models.theme
 
-// what is a concern?
+
 const authenticate = require('./concerns/authenticate')
 const setUser = require('./concerns/set-current-user')
 const setModel = require('./concerns/set-mongoose-model')
@@ -16,27 +16,15 @@ const setModel = require('./concerns/set-mongoose-model')
 // req = request; res = response; next = next function in chain
 const index = (req, res, next) => {
   Theme.find()
-    // get response & output at json
-
-    // .then(themes => res.json({
-      //   JSON_GOES_HERE
-      // }))
-
-    // .then(themes => res.json({
-    //   themes: EXAMPLE_VALUES
-    // }))
-
-    // EXAMPLE_VALUES = themes.map((e) => e.toJSON( OPTIONS ))
-
-    // OPTIONS = { virtuals: true, user: req.user }
-
-    .then(themes => res.json({
-      themes: themes.map((e) =>
-        e.toJSON({ virtuals: true, user: req.user }))
-    }))
-    // next event in chain is error handler
-    .catch(next)
-}
+  .then( themes => res.json({
+    themes: themes.map(function (e) {
+      // console.log(e._owner)
+      // const email = users.find( u => u.id === e._owner)
+      return e.toJSON({ virtuals: true, user: req.user })
+    })
+  }))
+  .catch(next);
+};
 
 const show = (req, res) => {
   res.json({
@@ -48,6 +36,7 @@ const create = (req, res, next) => {
   const theme = Object.assign(req.body.theme, {
     _owner: req.user._id
   })
+
   Theme.create(theme)
     .then(theme =>
       res.status(201)
@@ -78,7 +67,7 @@ module.exports = controller({
   destroy
 }, { before: [
   { method: setUser, only: ['index', 'show'] },
-  { method: authenticate, except: ['index', 'show'] },
+  { method: authenticate },
   { method: setModel(Theme), only: ['show'] },
   { method: setModel(Theme, { forUser: true }), only: ['update', 'destroy'] }
 ] })

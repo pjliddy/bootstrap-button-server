@@ -48,6 +48,7 @@ const create = (req, res, next) => {
   const example = Object.assign(req.body.example, {
     _owner: req.user._id
   })
+
   Example.create(example)
     .then(example =>
       res.status(201)
