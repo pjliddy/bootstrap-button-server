@@ -14,7 +14,12 @@ const setUser = require('./concerns/set-current-user')
 
 // index(): GET all themes
 const index = (req, res, next) => {
-  Theme.find()
+  // console.log("Req:", req)
+  // console.log("User:", req.user)
+  // console.log("User ID:", req.user._id)
+  Theme.find({
+     "_owner": req.user._id
+   })
   .then( themes => res.json({
     themes: themes.map(function (e) {
       return e.toJSON({ virtuals: true, user: req.user })
@@ -67,8 +72,22 @@ module.exports = controller({
   update,
   destroy
 }, { before: [
-  { method: setUser, only: ['index', 'show'] },
-  { method: authenticate },
-  { method: setModel(Theme), only: ['show'] },
-  { method: setModel(Theme, { forUser: true }), only: ['update', 'destroy'] }
+  // { method: setUser, only: [] },
+  // {
+  //   method: setUser,
+  //   only: ['index', 'show']
+  // },
+  // { method: authenticate, except: [] },
+  {
+    method: authenticate,
+    // except: ['index', 'show']
+  },
+  {
+    method: setModel(Theme),
+    only: ['show']
+  },
+  {
+    method: setModel(Theme, { forUser: true }),
+    only: ['update', 'destroy']
+  }
 ]})
