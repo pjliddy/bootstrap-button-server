@@ -14,9 +14,12 @@ const setUser = require('./concerns/set-current-user')
 
 // index(): GET all themes
 const index = (req, res, next) => {
-  console.log('index')
-
-  Theme.find()
+  // console.log("Req:", req)
+  // console.log("User:", req.user)
+  // console.log("User ID:", req.user._id)
+  Theme.find({
+     "_owner": req.user._id
+   })
   .then( themes => res.json({
     themes: themes.map(function (e) {
       return e.toJSON({ virtuals: true, user: req.user })
