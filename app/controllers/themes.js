@@ -14,6 +14,8 @@ const setUser = require('./concerns/set-current-user')
 
 // index(): GET all themes
 const index = (req, res, next) => {
+  console.log('index')
+
   Theme.find()
   .then( themes => res.json({
     themes: themes.map(function (e) {
