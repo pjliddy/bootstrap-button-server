@@ -16,7 +16,7 @@ Once the server was stable, it was deployed to the production environment for te
 - **Deployed Client:** https://pjliddy.github.io/bootstrap-button-client/
 
 - **Deployed API:** https://bootstrap-button.herokuapp.com/
--
+
 - **Client GitHub Repository:** https://github.com/pjliddy/bootstrap-button-client/
 
 - **API GitHub Repository** (this one): https://github.com/pjliddy/bootstrap-button-server/
