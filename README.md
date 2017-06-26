@@ -13,13 +13,13 @@ Once the server was stable, it was deployed to the production environment for te
 
 ## Project Links
 
-- **Deployed Client:** https://pjliddy.github.io/bootstrap-button-client/
+- **Deployed Client:** https://pjliddy.github.io/bootstrap-buttons/
 
-- **Deployed API:** https://bootstrap-button.herokuapp.com/
+- **Deployed API:** https://bootstrap-buttons.herokuapp.com/
 
-- **Client GitHub Repository:** https://github.com/pjliddy/bootstrap-button-client/
+- **Client GitHub Repository:** https://github.com/pjliddy/bootstrap-buttons/
 
-- **API GitHub Repository** (this one): https://github.com/pjliddy/bootstrap-button-server/
+- **API GitHub Repository** (this one): https://github.com/pjliddy/bootstrap-buttons-api/
 
 
 
